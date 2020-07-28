@@ -14,9 +14,9 @@
 
    <section>
       <div class="container">
-         <div class="cart">
+         <div class="cart" >
             <div class="col-md-12 col-lg-10 mx-auto">
-               <div class="cart-item">
+               <div class="cart-item" id="phoneDisplay">
                   <div class="row">
                      <div class="col-md-7 center-item">
                         <img src="images/product-1.png" alt="">
@@ -30,12 +30,12 @@
                            <button id="firstPlusBtn" class="btn btn-default"><i class="fas fa-plus"></i></button>
                         </div>
                         <h5>$ <span id="firstCartPrice">1219</span></h5>
-                        <img id="cross-sign" src="images/remove.png" alt="" class="remove-item">
+                        <img id="crossPhone" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
 
-               <div class="cart-item">
+               <div class="cart-item" id="caseDisplay">
                   <div class="row">
                      <div class="col-md-7 center-item mx-auto">
                         <img src="images/product-2.png" alt="">
@@ -49,7 +49,7 @@
 
                         </div>
                         <h5>$ <span id="secondCartPrice">59</span></h5>
-                        <img src="images/remove.png" alt="" class="remove-item">
+                        <img id="crossCase" src="images/remove.png" alt="" class="remove-item">
                      </div>
                   </div>
                </div>
@@ -104,6 +104,19 @@
          handleProductChange('first',false);
       })
 
+      // cross Btn for mobile
+      const crossPhone = document.getElementById('crossPhone');
+      crossPhone.addEventListener('click',function(){
+         crossProduct('first',true);
+         document.getElementById('phoneDisplay').style.display = 'none';
+      })
+       // cross Btn for case
+       const crossCase = document.getElementById('crossCase');
+       crossCase.addEventListener('click',function(){
+         crossProduct('second',true);
+         document.getElementById('caseDisplay').style.display = 'none';
+      })
+
       //function btn inc and dec 
       function handleProductChange(product,isIncrease) {
          const productCartInput = getInputValue(product);
@@ -135,7 +148,7 @@
          document.getElementById('subTotal').innerText = subTotal;
 
          //tax
-         const tax = Math.round(subTotal * 0.1);
+         const tax = Math.floor(subTotal * 0.1);
          document.getElementById('tax').innerText = tax;
 
          const total = subTotal + tax;
@@ -147,6 +160,50 @@
          const productInput = document.getElementById(product + 'CartInput').value;
          const productCartInputNum = parseInt(productInput);
          return productCartInputNum;
+      }
+
+      //cross function mbl
+      function crossProduct(product,isProduct) {
+         const productCartInput = document.getElementById(product + 'CartInput').value;
+         const productCartInputNum = parseInt(productCartInput);
+ 
+         let productCartInputPrice = 0
+         if(product == 'first'){
+            productCartInputPrice = productCartInputNum * 1219;
+         }else if(product == 'second'){
+            productCartInputPrice = productCartInputNum * 59;
+         }
+         // document.getElementById(product +'CartPrice').innerText = productCartPrice;
+        
+            // productCartInputPrice = productCartInputNum * 1219;
+            
+         
+            //   productCartInputPrice = productCartInputNum * 59;    
+         
+         
+         const subTotal = document.getElementById('subTotal').innerText;
+            const subTotalNum = parseInt(subTotal);
+            console.log(subTotalNum);
+            document.getElementById('subTotal').innerText = subTotalNum - productCartInputPrice;
+         
+
+         const taxAmount =  document.getElementById('tax').innerText; 
+         const taxAmountNum = parseInt(taxAmount);
+
+         const productCartPrice = document.getElementById(product + 'CartPrice').innerText;
+         const productCartPriceNum = parseInt(productCartPrice);
+
+         const tax = Math.floor(productCartPriceNum * 0.1) ;
+         document.getElementById('tax').innerText =  taxAmountNum - tax;
+
+         const totalAmountCross = tax + productCartPriceNum;
+         const total = document.getElementById('total').innerText;
+         const totalNum = parseInt(total);
+         document.getElementById('total').innerText = totalNum - totalAmountCross;
+
+         
+        
+
       }
 
    </script>
