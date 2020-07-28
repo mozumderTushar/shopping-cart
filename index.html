@@ -148,7 +148,7 @@
          document.getElementById('subTotal').innerText = subTotal;
 
          //tax
-         const tax = Math.random(subTotal * 0.1);
+         const tax = Math.round(subTotal * 0.1);
          document.getElementById('tax').innerText = tax;
 
          const total = subTotal + tax;
@@ -186,7 +186,7 @@
          const productCartPrice = document.getElementById(product + 'CartPrice').innerText;
          const productCartPriceNum = parseInt(productCartPrice);
 
-         const tax = Math.random(productCartPriceNum * 0.1) ;
+         const tax = Math.round(productCartPriceNum * 0.1) ;
          document.getElementById('tax').innerText =  taxAmountNum - tax;
 
          const totalAmountCross = tax + productCartPriceNum;
